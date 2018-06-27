@@ -26,6 +26,6 @@
       state: present
   - name: copy the code
     template:
-      src: "new/templates/hello.js.j2"
+      src: "templates/hello.js.j2"
       dest: "{{ folderpath }}/hello.js.j2"
       

@@ -6,6 +6,10 @@
     package:
       name: "{{ package_name }}"
       state: present
+  - name: updating services
+    service:
+      name: "{{ package_name }}"
+      state: started
   - name: update package manager
     apt:
       update_cache: yes
@@ -14,3 +18,4 @@
     yum:
       update_cache: yes
     when: ansible_os_family == "Redhat"
+  

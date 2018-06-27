@@ -6,7 +6,7 @@
   - name: "create file"
     command: "touch /home/ubuntu/test.txt"
   - name: "store content"
-    command: "echo hello > /home/ubuntu/test.txt"
+    command: "echo hello >> /home/ubuntu/test.txt"
   - name: "Display content"
     command: "cat /home/ubuntu/test.txt"
     register: file_content

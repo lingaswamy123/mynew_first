@@ -3,5 +3,5 @@ package_name: apache2
 
 utilities:
 - git
-- nano
 - tree
+- nano

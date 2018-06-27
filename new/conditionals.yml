@@ -4,7 +4,7 @@
   tasks: 
   - name: installing web server
     package:
-      name: "{{ package_ name }}"
+      name: "{{ package_name }}"
       state: present
   - name: update package manager
     apt:

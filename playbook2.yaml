@@ -1,0 +1,18 @@
+---
+- name: "Qualitythought"
+  mailid: "qtdevops@gmail.com"
+  Transport: no
+  courses:
+  - name: "DevOps"
+    duration:
+      value: 70
+      unit: days
+  - name: "AWS"
+    duration:
+      value: 70
+      unit: days
+  - name: "Azure"
+    duration:
+      value: 70
+      unit: days
+

@@ -1,0 +1,21 @@
+---
+- moviename: "bahubali1"
+  hero: "prabhas"
+  heroine: "anushka"
+  mainvillan: "rana"
+  sideactors:
+  - firstactor: "thamman"
+    secondactor: "bichhaladeva"
+    thirdactor: "kattappa"
+    fouthactor: "kalakeya"
+- moviename: "bahubali2"
+  hero: "prabhas"
+  heroine: "anushka"
+  mainvillan: "rana"
+  sideactors:
+  - firstactor: "thamman"
+    secondactor: "bichhaladeva"
+    thirdactor: "kattappa"
+    fouthactor: "kalakeya"
+
+  

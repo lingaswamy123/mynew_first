@@ -1,0 +1,31 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: update apt packages
+    apt:
+      update_cache: yes
+# Nodejs specific settings
+- hosts: app
+  become: yes
+  vars:
+    folderpath: /home/ansible/nodesetup
+  tasks:
+  - name: creating nodesetup directory
+    file:
+      path: "{{ folderpath }}"
+      state: directory
+      mode: 0755
+  - name: download node js package setup
+    command: "curl -sL https://deb.nodesource.com/setup_6.x -o {{ folderpath }}/nodesource_setup.sh"
+  - name: excute downloaded shellscript
+    command: "sudo bash {{ folderpath }}/nodesource_setup.sh"
+  - name: installing nodejs
+    apt:
+      name: nodejs
+      state: present
+  - name: copy the code
+    template:
+      src: "/home/ansible/templates/hello.js.j2"
+      dest: "{{ folderpath }}/hello.j2"
+

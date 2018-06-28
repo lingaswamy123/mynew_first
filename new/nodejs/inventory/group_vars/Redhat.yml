@@ -1,7 +1,0 @@
----
-package_name: httpd
-
-utilities:
-- git
-- tree
-- nano

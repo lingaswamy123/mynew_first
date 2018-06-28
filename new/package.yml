@@ -1,8 +1,0 @@
----
-- hosts: grpC
-  become: yes
-  tasks: 
-  - name: installing by package manager
-    package:
-      name: git
-      state: present

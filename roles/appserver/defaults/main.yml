@@ -1,2 +1,4 @@
 ---
 # defaults file for appserver
+folderpath: /home/ansible/nodesetup
+node_version: 6

@@ -1,0 +1,4 @@
+# from galaxy for redis server
+- src: jpnewman.redis
+# from galaxy for mongodb serverless
+- src: kurron.mongodb

@@ -1,2 +1,10 @@
 ---
 # handlers file for appserver
+- name: restart redis
+  service:
+    name: redis-service
+    state: restarted
+- name: start redis
+  service:
+    name: redis-service
+    state: started

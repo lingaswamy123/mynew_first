@@ -1,0 +1,41 @@
+---
+# installing tomcat from 
+# https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-8-on-ubuntu-16-04
+
+- hosts: all
+  become: yes
+  vars:
+    folderpath: /opt/tomcat
+  tasks:
+  - name: updating packages
+    apt:
+      update_cache: yes
+  - name: installing java development kit 
+    apt:
+      name: default-jdk
+      state: present
+  - name: creating tomcat group
+    group:
+      name: tomcat
+      state: present
+  - name: adding tomcat user to tomcat group
+    user:
+      name: tomcat
+      shell: /bin/false
+      group: tomcat
+      create_home: {{ folderpath }}
+  - name: "creating downloading directory for tomcat"
+    file:
+      path: {{ folderpath }}
+      state: directory
+      mode: 0755
+  - name: download tomcat tar file into tomcat folder
+    command: "curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.tar.gz"
+  - name: extracting tar 
+    command: "sudo tar xzvf apache-tomcat-8*tar.gz -C {{ folderpath }} --strip-components=1"
+  - name: giving tomcat group ownership over installation directory
+    command: "sudo chgrp -R tomcat {{ folderpath }}"
+  - name: 
+
+  
+

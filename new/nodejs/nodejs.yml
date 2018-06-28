@@ -6,6 +6,10 @@
     apt:
       update_cache: yes
 # Nodejs specific settings
+# installed from website 
+# https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
+
+
 - hosts: app
   become: yes
   vars:
@@ -24,8 +28,8 @@
     apt:
       name: nodejs
       state: present
-  - name: copy the code
-    template:
-      src: "/home/ansible/git2/mynew_first/new/templates/hello.js.j2"
-      dest: "{{ folderpath }}/hello.js.j2"
+ # - name: copy the code
+ #   template:
+ #     src: "/home/ansible/git2/mynew_first/new/templates/hello.js.j2"
+ #     dest: "{{ folderpath }}/hello.js.j2"
       

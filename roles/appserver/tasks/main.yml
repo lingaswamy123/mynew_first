@@ -1,10 +1,10 @@
 ---
 # tasks file for appserver
 - name: creating nodesetup directory
-    file:
-      path: "{{ folderpath }}"
-      state: directory
-      mode: 0755
+  file:
+    path: "{{ folderpath }}"
+    state: directory
+    mode: 0755
 - name: download nodejs package setup
   command: "curl -sL https://deb.nodesource.com/setup_{{ node_version }}.x -o {{ folderpath }}/nodesource_setup.sh"
 - name: execute download shellscript

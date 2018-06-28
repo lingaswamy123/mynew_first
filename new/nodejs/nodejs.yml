@@ -28,8 +28,35 @@
     apt:
       name: nodejs
       state: present
- # - name: copy the code
- #   template:
- #     src: "/home/ansible/git2/mynew_first/new/templates/hello.js.j2"
- #     dest: "{{ folderpath }}/hello.js.j2"
+  - name: copy the code
+    template:
+      src: "templates/hello.js.j2"
+      dest: "{{ folderpath }}/hello.js"
+  - name: Install  pm2.
+    npm:
+      name: coffee-script
+      global: yes
+  - name: start nodejs app
+    command: "pm2 start {{ folderpath }}/hello.js"
+- hosts: webserver
+  become: yes
+  vars:
+    webserver_dns_name: "ec2-18-236-93-246.us-west-2.compute.amazonaws.com"
+    appserver_ip: 172.31.28.78
+  tasks:
+  - name: install nginx
+    apt:
+      name: nginx
+      state: present
+  - name: copy default file
+    template:
+      src: templates/default.j2
+      dest: /etc/nginx/sites-available/default
+    notify: restart nginx
+  handlers:
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted
+
       

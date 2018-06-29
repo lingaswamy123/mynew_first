@@ -28,12 +28,12 @@
       name: tomcat8
       state: present
   - name: giving tomcat group ownership over installation directory
-    command: "sudo chgrp -R tomcat /var/lib/"
+    command: "chgrp -R tomcat /var/lib/"
   - name: giving read access to tomcat group to conf directory
-    command: "sudo chmod -R g+r /var/lib/tomcat8/conf"
-    command: "sudo chmod  g+x /var/lib/tomcat8/conf"
+    command: "chmod -R g+r /var/lib/tomcat8/conf"
+    command: "chmod  g+x /var/lib/tomcat8/conf"
   - name: make tomcat user owner of folders
-    command: "sudo chown -R tomcat /var/lib/tomcat8/webapps/ /var/lib/tomcat8/work/ /var/lib/tomcat8/logs/"
+    command: "chown -R tomcat /var/lib/tomcat8/webapps/ /var/lib/tomcat8/work/ /var/lib/tomcat8/logs/"
   - name: templates
     template:
       src: templates/user-xml.j2

@@ -2,7 +2,7 @@
 # installing tomcat from 
 # https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-8-on-ubuntu-16-04
 
-- hosts: all
+- hosts: tomcat
   become: yes
   vars:
     folderpath: /opt/tomcat
@@ -23,19 +23,27 @@
       name: tomcat
       shell: /bin/false
       group: tomcat
-      create_home: {{ folderpath }}
-  - name: "creating downloading directory for tomcat"
-    file:
-      path: {{ folderpath }}
-      state: directory
-      mode: 0755
-  - name: download tomcat tar file into tomcat folder
-    command: "curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.tar.gz"
-  - name: extracting tar 
-    command: "sudo tar xzvf apache-tomcat-8*tar.gz -C {{ folderpath }} --strip-components=1"
+  - name: install tomcat8
+    apt:
+      name: tomcat8
+      state: present
   - name: giving tomcat group ownership over installation directory
-    command: "sudo chgrp -R tomcat {{ folderpath }}"
-  - name: 
+    command: "sudo chgrp -R tomcat /var/lib/"
+  - name: giving read access to tomcat group to conf directory
+    command: "sudo chmod -R g+r /var/lib/tomcat8/conf"
+    command: "sudo chmod  g+x /var/lib/tomcat8/conf"
+  - name: make tomcat user owner of folders
+    command: "sudo chown -R tomcat /var/lib/tomcat8/webapps/ /var/lib/tomcat8/work/ /var/lib/tomcat8/logs/"
+  - name: templates
+    template:
+      src: templates/user-xml.j2
+      dest: /var/lib/tomcat8/conf/tomcat-users.xml
+  - name: restart again
+    service:
+      name: tomcat8
+      state: restarted
+      
+
 
   
 

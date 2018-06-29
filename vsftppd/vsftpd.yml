@@ -1,0 +1,41 @@
+---
+# deployind vsftpd from the source
+# https://www.tecmint.com/install-ftp-server-in-ubuntu/
+
+- hosts: vsftpd
+  become: yes
+  tasks:
+  - name: updating node
+    apt:
+      update_cache: yes
+  - name: installing vsftpd
+    apt:
+      name: vsftpd
+      state: present
+  - name: starting the service and enabling
+    service:
+      name: vsftpd
+      state: started
+  - name: enabling the service
+    service:
+      name: vsftpd
+      enabled: yes
+  - name: allowing ports to firewall
+    ufw:
+      rule: allow
+      port: 20:21
+      proto: tcp
+  - name: writing template for /etc/vsftpd.conf
+    template:
+      src: templates/vsftpd.conf.j2
+      dest: /etc/vsftpd.conf
+  - name: restarting 
+    apt:
+      name: vsftpd
+      state: restarted
+
+    
+    
+
+  
+  

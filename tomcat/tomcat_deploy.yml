@@ -14,19 +14,14 @@
     apt:
       name: default-jdk
       state: present
-  - name: creating tomcat group
-    group:
-      name: tomcat
-      state: present
-  - name: adding tomcat user to tomcat group
-    user:
-      name: tomcat
-      shell: /bin/false
-      group: tomcat
   - name: install tomcat8
     apt:
       name: tomcat8
       state: present
+  - name: start tomcat
+    service:
+      name: tomcat8
+      state: started
   - name: templates
     template:
       src: templates/user-xml.j2

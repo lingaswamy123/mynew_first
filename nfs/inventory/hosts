@@ -1,6 +1,5 @@
 [nfs]
-ip-172-31-24-41.us-west-2.compute.internal
+ip-172-31-24-118.us-west-2.compute.internal
 
 [nfsclient]
-
 ip-172-31-17-109.us-west-2.compute.internal

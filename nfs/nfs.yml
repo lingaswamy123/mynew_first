@@ -21,7 +21,7 @@
   - name: mount the partition in fstab
     mount:
       path: /home/ansible/nfs
-      src: /dev/xvda
+      src: /dev/xvda2
       fstype: ext4
       opts: defaults
       state: mounted

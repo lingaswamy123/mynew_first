@@ -16,9 +16,9 @@
     service:
       name: httpd
       state: started
-  - name: enabling http in firewalld
-    firewalld:
-      service: http
-      permanent: true
-      state: enabled
+  #- name: enabling http in firewalld
+  #  firewalld:
+  #    service: http
+  #    permanent: true
+  #    state: enabled
   

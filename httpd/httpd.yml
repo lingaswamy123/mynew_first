@@ -15,6 +15,7 @@
       name: httpd
       state: started
   - name: enabling http in firewalld
+  # make sure that by manually firewalld is present on the host machine
     firewalld:
       service: http
       permanent: true

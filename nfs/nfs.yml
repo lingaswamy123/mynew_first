@@ -22,7 +22,7 @@
     mount:
       path: /home/ansible/nfs
       src: /dev/xvda2
-      fstype: ext4
+      fstype: xfs
       opts: defaults
       state: mounted
   - name: export the directory 

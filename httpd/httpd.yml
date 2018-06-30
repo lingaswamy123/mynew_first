@@ -1,0 +1,21 @@
+---
+# configuring httpd web server on centos machies
+# taken reference from 
+# https://www.tecmint.com/install-apache-on-centos-7/
+- hosts: http
+  become: yes
+  tasks:
+  - name: updating yum packages
+    yum:
+      name: httpd
+      state: present
+  - name: starting httpd server
+    service:
+      name: httpd
+      state: started
+  - name: enabling http in firewalld
+    firewalld:
+      service: http
+      permanent: true
+      state: enabled
+  

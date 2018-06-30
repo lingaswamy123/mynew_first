@@ -12,11 +12,6 @@
       path: /home/ansible/nfs
       state: directory
       mode: 0755
-  - name: storing some content in export directory
-    copy:
-      src: file1
-      dest: /home/ansible/nfs
-      mode: 0755
   - name: exporting the directory
     template:
       src: templates/export.j2

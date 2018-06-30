@@ -24,33 +24,33 @@
     notify:
     - restart nfs
   # client side configuration
-  - hosts: nfsclient
-    become: yes
-    tasks:
-    - name: install nfs-utils
-      yum:
-        name: nfs-utils
-        state: present
-        update_cache: yes
-      notify:
-      - restart nfs
-    - name: making director for mounting nfs_server
-      file:
-        path: /home/ansible/nfsclient
-        state: directory
-        mode: 0755
-    - name: making fstab updated with mount point
-      mount:
-        path: /home/ansible/nfsclient
-        src: 172.31.24.41:/home/ansible/nfs
-        fstype: nfs
-        opts: defaults
-        state: mounted
-    handlers:
-      - name: restart nfs
-        service:
-          name: nfs-server
-          state: restarted
+- hosts: nfsclient
+  become: yes
+  tasks:
+  - name: install nfs-utils
+    yum:
+      name: nfs-utils
+      state: present
+      update_cache: yes
+    notify:
+    - restart nfs
+  - name: making director for mounting nfs_server
+    file:
+      path: /home/ansible/nfsclient
+      state: directory
+      mode: 0755
+  - name: making fstab updated with mount point
+    mount:
+      path: /home/ansible/nfsclient
+      src: 172.31.24.41:/home/ansible/nfs
+      fstype: nfs
+      opts: defaults
+      state: mounted
+  handlers:
+    - name: restart nfs
+      service:
+        name: nfs-server
+        state: restarted
 
   
 

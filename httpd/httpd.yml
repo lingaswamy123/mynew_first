@@ -1,6 +1,6 @@
 ---
 
-- hosts: http
+- hosts: all
   become: yes
   tasks:
   - name: updating yum packages

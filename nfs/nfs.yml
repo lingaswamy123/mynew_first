@@ -18,6 +18,11 @@
       dest: /etc/exports
     notify:
     - restart nfs
+  handlers:
+    - name: restart nfs
+      service:
+        name: nfs-server
+        state: restarted
   # client side configuration
 - hosts: nfsclient
   become: yes

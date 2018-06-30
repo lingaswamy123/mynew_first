@@ -22,8 +22,8 @@
     mount:
       path: /home/ansible/nfs
       src: /dev/xvda2
-      fstype: xfs
-      opts: defaults
+      fstype: ext4
+      opts: rw,noauto
       state: mounted
   - name: export the directory 
     command: echo "/home/ansible/nfs 172.31.0.0/16(rw,sync)" >> /etc/exports

@@ -7,8 +7,7 @@
   tasks:
   - name: updating yum packages
     yum:
-      name: httpd
-      state: present
+      update_cache: yes
   - name: starting httpd server
     service:
       name: httpd

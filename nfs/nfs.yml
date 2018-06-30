@@ -34,11 +34,6 @@
         update_cache: yes
       notify:
       - restart nfs
-    handlers:
-      - name: restart nfs
-        service:
-          name: nfs-server
-          state: restarted
     - name: making director for mounting nfs_server
       file:
         path: /home/ansible/nfsclient
@@ -51,6 +46,11 @@
         fstype: nfs
         opts: defaults
         state: mounted
+    handlers:
+      - name: restart nfs
+        service:
+          name: nfs-server
+          state: restarted
 
   
 

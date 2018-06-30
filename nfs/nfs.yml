@@ -39,14 +39,14 @@
         service:
           name: nfs-server
           state: restarted
-    - name: making directory for mounting nfs_server
+    - name: making director for mounting nfs_server
       file:
-        path: /mnt/nfsclient
+        path: /home/ansible/nfsclient
         state: directory
         mode: 0755
     - name: making fstab updated with mount point
       mount:
-        path: /mnt/nfsclient
+        path: /home/ansible/nfsclient
         src: 172.31.24.41:/home/ansible/nfs
         fstype: nfs
         opts: defaults

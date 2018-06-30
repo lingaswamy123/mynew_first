@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: nfs
   become: yes
   tasks:
   - name: install and update nfs package
@@ -12,29 +12,48 @@
       path: /home/ansible/nfs
       state: directory
       mode: 0755
-  - name: creating a partition
-    parted:
-      device: /dev/xvda
-      number: 2
-      state: present
-      part_end: 100KiB
-  - name: format the created partion
-    command: "mkfs.ext4 /dev/xvda2"
-  - name: mount the partition in fstab
-    mount:
-      path: /home/ansible/nfs
-      src: /dev/xvda2
-      fstab: /etc/fstab
-      fstype: ext4
-      opts: rw,noauto
-      state: mounted
-  - name: export the directory 
-    command: echo "/home/ansible/nfs 172.31.0.0/16(rw,sync)" >> /etc/exports
-  - name: start the nfs service
-    service:
-      name: nfs-server
-      state: started
- # - name: adding nfs-server in firewall
+  - name: storing some content in export directory
+    copy:
+      src: file*
+      dest: /home/ansible/nfs
+      mode: 0755
+  - name: exporting the directory
+    template:
+      src: templates/export.j2
+      dest: /etc/exports
+    notify:
+    - restart nfs
+  # client side configuration
+  - hosts: nfsclient
+    become: yes
+    tasks:
+    - name: install nfs-utils
+      yum:
+        name: nfs-utils
+        state: present
+        update_cache: yes
+      notify:
+      - restart nfs
+    handlers:
+      - name: restart nfs
+        service:
+          name: nfs-server
+          state: restarted
+    - name: making directory for mounting nfs_server
+      file:
+        path: /mnt/nfsclient
+        state: directory
+        mode: 0755
+    - name: making fstab updated with mount point
+      mount:
+        path: /mnt/nfsclient
+        src: 172.31.24.41:/home/ansible/nfs
+        fstype: nfs
+        opts: defaults
+        state: mounted
+
+  
+
     
   
     

@@ -14,14 +14,14 @@
       mode: 0755
   - name: creating a partition
     parted:
-      device: /dev/xvda
+      device: /dev/xvd
       number: 1
       state: present
       part_end: 1GiB
   - name: mount the partition in fstab
     mount:
       path: /home/ansible/nfs
-      src: /dev/xvda2
+      src: /dev/xvd
       fstype: ext4
       opts: defaults
       state: mounted

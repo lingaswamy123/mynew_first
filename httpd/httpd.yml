@@ -5,13 +5,11 @@
 - hosts: all
   become: yes
   tasks:
-  - name: updating yum packages
-    yum:
-      update_cache: yes
   - name: installing httpd package
     yum:
       name: httpd
       state: present
+      update_cache: yes
   - name: starting httpd server
     service:
       name: httpd

@@ -1,13 +1,14 @@
 ---
-# configuring httpd web server on centos machies
-# taken reference from 
-# https://www.tecmint.com/install-apache-on-centos-7/
+
 - hosts: http
   become: yes
   tasks:
   - name: updating yum packages
     yum:
       update_cache: yes
+# configuring httpd web server on centos machies
+# taken reference from 
+# https://www.tecmint.com/install-apache-on-centos-7/
   - name: installing httpd package
     yum:
       name: httpd

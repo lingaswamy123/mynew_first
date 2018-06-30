@@ -8,6 +8,10 @@
   - name: updating yum packages
     yum:
       update_cache: yes
+  - name: installing httpd package
+    yum:
+      name: httpd
+      state: present
   - name: starting httpd server
     service:
       name: httpd
